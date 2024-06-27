@@ -6,11 +6,13 @@ use App\Models\Todo;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class TodoList extends Component
 {
 
     use WithPagination;
+    use LivewireAlert;
 
     #[Rule('required|min:3|max:50')]
     public $name;
@@ -34,7 +36,12 @@ class TodoList extends Component
         $this->reset('name');
 
         // success message
-        session()->flash('success', 'Todo created successfully');
+        // session()->flash('success', 'Todo created successfully');
+        $this->alert('success', 'Todo created successfully', [
+            'position' => 'top-end',
+            'timer' => 1500
+
+        ]);
 
         // reset page to go to the first page
         $this->resetPage();
